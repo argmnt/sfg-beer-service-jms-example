@@ -1,15 +1,17 @@
 package guru.springframework.msscbeerservice.services.brewing;
 
+import guru.sfg.common.events.BeerDto;
 import guru.springframework.msscbeerservice.config.JmsConfig;
 import guru.springframework.msscbeerservice.domain.Beer;
-import guru.springframework.msscbeerservice.events.BrewBeerEvent;
-import guru.springframework.msscbeerservice.events.NewInventoryEvent;
+import guru.sfg.common.events.BrewBeerEvent;
+import guru.sfg.common.events.NewInventoryEvent;
 import guru.springframework.msscbeerservice.repositories.BeerRepository;
-import guru.springframework.msscbeerservice.web.model.BeerDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jms.annotation.JmsListener;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.messaging.handler.annotation.Headers;
 import org.springframework.stereotype.Service;
 
 /**
@@ -24,7 +26,7 @@ public class BrewBeerListener {
     private final JmsTemplate jmsTemplate;
 
     @JmsListener(destination = JmsConfig.BREWING_REQUEST_QUEUE)
-    public void listen(BrewBeerEvent event){
+    public void listen(BrewBeerEvent event, @Headers MessageHeaders messageHeaders){
         BeerDto beerDto = event.getBeerDto();
 
         Beer beer = beerRepository.getOne(beerDto.getId());

@@ -1,4 +1,4 @@
-package guru.springframework.msscbeerservice.web.model;
+package guru.sfg.common.events;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
@@ -35,11 +35,11 @@ public class BeerDto implements Serializable  {
 
     @Null
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
-    private OffsetDateTime createdDate;
+    private OffsetDateTime createdDate = null;
 
     @Null
     @JsonFormat(pattern="yyyy-MM-dd'T'HH:mm:ssZ", shape=JsonFormat.Shape.STRING)
-    private OffsetDateTime lastModifiedDate;
+    private OffsetDateTime lastModifiedDate = null;
 
     @NotBlank
     private String beerName;
