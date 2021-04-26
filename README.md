@@ -2,6 +2,19 @@
 
 * Exists here for testing purposes!
 
+# 
+##### ActiveMQ Docker Image
+
+```bash
+docker pull vromero/activemq-artemis
+
+docker run -it --rm \
+  -p 8161:8161 \
+  -p 61616:61616 \
+  vromero/activemq-artemis
+```
+
+#
 
 # MSSC Beer Service
 
