@@ -1,5 +1,9 @@
 package guru.springframework.msscbeerservice.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jdk8.Jdk8Module;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.fasterxml.jackson.module.paramnames.ParameterNamesModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
@@ -16,10 +20,11 @@ public class JmsConfig {
     public static final String NEW_INVENTORY_QUEUE = "new-inventory";
 
     @Bean // Serialize message content to json using TextMessage
-    public MessageConverter jacksonJmsMessageConverter() {
+    public MessageConverter jacksonJmsMessageConverter(ObjectMapper objectMapper) {
         MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
         converter.setTargetType(MessageType.TEXT);
-//        converter.setTypeIdPropertyName("_type");
+        converter.setTypeIdPropertyName("_type");
+        converter.setObjectMapper(objectMapper);
         return converter;
     }
 }

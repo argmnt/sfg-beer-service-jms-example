@@ -1,5 +1,7 @@
-package guru.sfg.common.events;
+package guru.sfg.brewery.model.events;
 
+
+import guru.sfg.brewery.model.BeerDto;
 
 /**
  * Created by jt on 2019-07-21.
